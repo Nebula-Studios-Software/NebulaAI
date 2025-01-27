@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>title</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+<div class="relative isolate px-6 pt-14 lg:px-8 h-screen">
+    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div
+            class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-orange-600 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+    <div class="mx-auto max-w-7xl h-5/6 py-16">
+        <p class="text-zinc-50 font-semibold py-2">Nebula Studios AI</p>
+        <button id="clearChat"
+                class="absolute top-2 right-2 bg-red-600/50 border border-red-600 text-white px-3 py-1 rounded hover:bg-red-600 transition-all ease-in-out duration-300">
+            Clear
+            Chat
+        </button>
+        <div id="chatArea"
+             class="flex-grow overflow-y-auto bg-zinc-950/50 h-full rounded-md backdrop-blur-md border-2 border-zinc-600 mb-10 p-5 relative">
+        </div>
+        <form id="chatForm" method="post">
+            <label for="prompt" class="sr-only">Your message</label>
+            <div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-zinc-950/50 border border-zinc-600">
+
+                <!-- Dropdown menu -->
+                <label for="maxContext" class="block text-sm font-medium text-zinc-200"> Max Context </label>
+                <select id="maxContext" name="max_context_lenght"
+                        class="w-fit rounded-lg bg-zinc-950 border-zinc-600 text-zinc-200 sm:text-sm">
+                    <option value="1024"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1024
+                    </option>
+                    <option value="2048"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">2048
+                    </option>
+                    <option value="4096"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">4096
+                    </option>
+                </select>
+
+                <!-- Dropdown menu -->
+                <label for="maxLenght" class="block text-sm font-medium text-zinc-200"> Max Length </label>
+                <select id="maxLenght" name="max_lenght"
+                        class="w-fit rounded-lg bg-zinc-950 border-zinc-600 text-zinc-200 sm:text-sm">
+                    <option value="150"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">150
+                    </option>
+                    <option value="300"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">300
+                    </option>
+                    <option value="400"
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">400
+                    </option>
+                </select>
+
+                <!-- Add this div above the textarea in Index.cshtml -->
+                <div class="flex flex-col w-full relative">
+                    <div id="charCounter"
+                         class="absolute top-0 right-0 text-xs text-zinc-400 p-1 rounded-b-md bg-zinc-700/50">0 /
+                        0
+                    </div>
+                    <textarea id="prompt" name="prompt" rows="1" class="auto-expand"
+                              placeholder="Your message..."></textarea>
+                </div>
+                <button type="submit"
+                        class="inline-flex justify-center p-2 text-orange-600 rounded-full cursor-pointer hover:translate-x-1 duration-300 transition-all">
+                    <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                         fill="currentColor" viewBox="0 0 18 20">
+                        <path
+                            d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 0 0 0 1.156-1.376Z" />
+                    </svg>
+                    <span class="sr-only">Send message</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div
+        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true">
+        <div
+            class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-orange-600 opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+</div>
+<script src="~/js/chat.js"></script>
+</body>
+</html>

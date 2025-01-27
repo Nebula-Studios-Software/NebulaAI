@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+textarea.auto-expand {
+    @apply block mx-4 p-2.5 w-full text-sm bg-zinc-950 border-zinc-600 text-zinc-200 rounded-lg border focus:ring-zinc-600 focus:border-zinc-600 duration-300 transition-all;
+    overflow: hidden;
+    resize: none;
+}

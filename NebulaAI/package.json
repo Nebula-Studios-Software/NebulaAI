@@ -1,0 +1,25 @@
+{
+  "name": "koboldui",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "prettier": "3.4.2",
+    "tailwindcss": "^3.4.17"
+  },
+  "main": "tailwind.config.js",
+  "scripts": {
+    "css:build": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --minify",
+    "css:watch": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --watch",
+    "prettier:write": "npx prettier . --write",
+    "prettier:check": "npx prettier . --check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "gpt-3-encoder": "^1.1.4",
+    "gsap": "^3.12.7",
+    "jquery": "^3.7.1"
+  }
+}
